@@ -56,6 +56,9 @@ jobs:
         with:
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
+            echo "first"
+            echo ${{ github.sha }}
             az containerapp registry set -n queuereader -g conapps-rg --server containerhack.azurecr.io --username  ${{ secrets.QUEUEREADER_REGISTRY_USERNAME }} --password ${{ secrets.QUEUEREADER_REGISTRY_PASSWORD }}
+            echo "second"
             echo ${{ github.sha }}
             az containerapp update -n queuereader -g conapps-rg --image containerhack.azurecr.io/queuereader:${{ github.sha }}
